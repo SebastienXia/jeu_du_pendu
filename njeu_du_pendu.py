@@ -91,5 +91,3 @@ def jeu_du_pendu():                                                 # fonction d
     liste_de_mots_deja_propose = []
     nb_points = 0
     nb_erreur = 0
-    print(mot_a_trouve)
-
