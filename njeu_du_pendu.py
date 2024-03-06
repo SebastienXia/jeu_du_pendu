@@ -89,7 +89,6 @@ def jeu_du_pendu():                                                 # fonction d
         nliste.append("-")
 
     liste_de_mots_deja_propose = []
-    nb_points = 0
     nb_erreur = 0
 
     while nb_erreur != 6:
@@ -100,13 +99,12 @@ def jeu_du_pendu():                                                 # fonction d
 
         lettre_proposer = input("Proposez une lettre : ")
    
-
         if lettre_proposer in list_du_mot:
 
             for (index,lettres) in enumerate(list_du_mot):
                 if lettres == lettre_proposer:
                     nliste[index] = lettres
-                    mot_cache = "".join(nliste)
+                mot_cache = "".join(nliste)
 
             if lettre_proposer not in liste_de_mots_deja_propose:
 
