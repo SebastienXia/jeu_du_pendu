@@ -2,8 +2,7 @@
 
 #Inportation du module random + importation du fichier liste_mots:
 
-import random  
-from liste_mots import liste_de_mots
+import random 
 
 # Definition local des fonction qu'on va utiliser tout au long de notre programme:
 
@@ -77,10 +76,12 @@ def dessinPendu(nb):    # dessin du pendu donnée par le professeur.
     ]
     return tab[nb]
 
-def jeu_du_pendu():                                                 # fonction du jeu du pendu.
+def jeu_du_pendu():                                                                                                                             # fonction du jeu du pendu.
     "Cette fonction permet de jouer au pendu lorsqu'on l'appelle"
+    print("Bienvenue dans le jeu du pendu !")
 
-    mot_a_trouve = random.choice(liste_de_mots)                     # random.choice permet de choisir n'importe quel mot dans la liste donnée.
+    words = [word.strip() for word in open("mots.txt", encoding="utf-8")]                                                                       # ouverture du fichier liste_mots.txt et lecture de chaque mot. 
+    mot_a_trouve = random.choice(words)                                                                                                         # random.choice permet de choisir n'importe quel mot dans la liste donnée.
     
     list_du_mot = []
     nliste = []
@@ -91,13 +92,14 @@ def jeu_du_pendu():                                                 # fonction d
     liste_de_mots_deja_propose = []
     nb_erreur = 0
 
-    while nb_erreur != 6:
+    while nb_erreur != 6:                                                                                                                        # boucle pour jouer au pendu.
 
         if mot_a_trouve == "".join(nliste):
             print(f"Bravo ! Vous avez trouvé le mot '{mot_a_trouve}'.")
             break
 
         lettre_proposer = input("Proposez une lettre : ")
+        lettre_proposer = lettre_proposer.upper()                                                                                                # Car la liste de mots est en majuscule (liste donné par le professeur).
    
         if lettre_proposer in list_du_mot:
 
@@ -113,6 +115,7 @@ def jeu_du_pendu():                                                 # fonction d
                 print(f"Cette lettre est correcte\nFaite attention, vous avez déjà proposé cette lettre !\n{dessinPendu(nb_erreur)}\n {mot_cache}")
 
         elif lettre_proposer not in list_du_mot:
+            mot_cache = ''.join(nliste)
             nb_erreur += 1
             if lettre_proposer not in liste_de_mots_deja_propose:
                 print(f"Cette lettre est incorrecte\n {dessinPendu(nb_erreur)}\n {mot_cache}")
@@ -121,11 +124,5 @@ def jeu_du_pendu():                                                 # fonction d
 
         liste_de_mots_deja_propose.append(lettre_proposer)
 
-
-
-        if nb_erreur == 6:
+        if nb_erreur == 6:                                                                                                                          # si le nombre d'erreur est égale à 6, on sort de la boucle.
             print(f"Désoler c'est perdu, le mot était '{mot_a_trouve}'")
-        
-# Corps du programme
-
-jeu_du_pendu()
